@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+            <title></title>
+
+        <!--custom stylesheet-->
+        <link rel="stylesheet" href="css/style.css">
+        <!--external stylesheets-->
+        <link rel="stylesheet" href="lib/leaflet/leaflet.css">
+        <link rel="stylesheet" href="lib/bootstrap.min.css">
+
+    </head>
+    <body>
+        <!--splash screen-->
+        <div class="modal" id="splash-modal">
+            <div class="modal-dialog" id="splash-dialogue">
+                <div class="modal-content" id="splash-content">
+                    <div class="modal-header">
+                        <div class="col-md-6 offset-md-3 col-sm-12 col-12" id="splash-title-container">
+                        </div>
+                    </div>
+                    <div class="modal-body col-md-6 offset-md-3 col-sm-12 col-12" id="splash-body">                       
+                        <h1 class="modal-title">Shorewood Village Walking Tour</h1>
+                        <p>Welcome to the Village of Shorewood, WI, located about 5 Miles North of Downtown Milwaukee. The Village of Shorewood has an optimal location for freshwater enthusiasts! The Village is bordered by two major bodies of water, the Milwaukee River and Lake Michigan, but unfortunately, that access comes at a cost. Pollution and flooding both present a problem in urban areas with numerous impervious surfaces. Therefore, the Village has adopted several practices to reduce the amount of pollution by runoff as well as managing stormwater issues. Stormwater is rain water that washes over the land collecting pollutants, trash, dog waste and chemicals. This can cause flooding, pollution, and erosion in areas surrounding natural bodies of water. Shorewood’s Water Walk showcases different practices implemented in the Village to combat and control excess stormwater by utilizing green infrastructure strategies. Let’s start our journey in Hubbard Park!</p>
+                        <button type="button" id="start" class="btn btn-secondary" data-bs-dismiss="modal">Start Tour</button>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>    
+        <!--stop modal-->
+        <div class="modal" id="stop-modal">
+            <div class="modal-dialog" id="stop-dialogue">
+                <div class="modal-content" id="stop-content">
+                    <div class="modal-header">
+                        <div class="col-md-6 offset-md-3 col-sm-12 col-12" id="title-container">
+                            <h1 class="modal-title" id="stop-title"></h1>
+                            <button id="play-audio">Play Audio</button>
+                        </div>
+                        <button type="button" id="x" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body col-md-6 offset-md-3 col-sm-12 col-12" id="stop-body"></div>
+                    <div id="stop-footer" class="modal-footer">
+                        <button type="button" id="prev" class="btn-secondary close" data-bs-dismiss="modal">Prev</button>
+                        <button type="button" id="next" class="btn-secondary close" data-bs-dismiss="modal">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>          
+        <!--map-->
+        <div id="map" 
+            data-basemap="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+            data-attribution="&copy;<a href='https://stadiamaps.com/'>Stadia Maps</a>, &copy; <a href='https://openmaptiles.org/'>OpenMapTiles</a> &copy; <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors">
+        </div>
+        <!--center button-->
+        <button id="locate">Where am I?</button>
+        <!--external scripts-->
+        <script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
+        <script type="text/javascript" src="lib/papaparse.js"></script>
+        <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+        <!--custom scripts-->
+        <script type="text/javascript" src="js/main.js"></script>
+    </body>
+</html>
