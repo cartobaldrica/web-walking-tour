@@ -5,11 +5,16 @@
 //create layout for popup at each stop (less important)
 
 (function(){
-    let map, route, stops, mapCenter, currentStop = 1, tourLength = 0, active = false, played = [],firstLocate = true;
+    let map, route, stops, mapCenter, currentStop = 1, tourLength = 0, active = false, played = [],firstLocate = true, locationMarker, circle;
     //splash screen modal variables
     let splash = document.getElementById('splash-modal'),
         splashModal = new bootstrap.Modal(splash);
     splashModal.show();
+
+    //add listener for the about button
+    document.querySelector(".about").addEventListener("click",function(){
+        splashModal.show();
+    })
     //modal variables for stops
     let stop = document.getElementById('stop-modal'),
         stopModal = new bootstrap.Modal(stop);
@@ -47,53 +52,47 @@
         }).addTo(map);
 
         //add location listenter to button
-        document.querySelector("#locate").addEventListener("click",getLocation)
+        document.querySelector(".location-button").addEventListener("click",getLocation)
         //add stop data
         addRoute();
         addStops();
     }
     //get location function
+    //location services
     function getLocation(){
-        map.locate({setView:false, watch:true, enableHighAccuracy: true} );
+        map.locate({setView:true, watch:true, enableHighAccuracy: true} );
     
         function onLocationFound(e){
             let radius = e.accuracy / 2;
-            let circle, locationMarker;
-    
+            console.log(e.accuracy)
             //removes marker and circle before adding a new one
-            if (firstLocate == false){
+            if (locationMarker){
                 map.removeLayer(circle);
                 map.removeLayer(locationMarker);
             }
             //adds location and accuracy information to the map
             if (e.accuracy < 90){
-                circle = L.circle(e.latlng, radius).addTo(map);
-                locationMarker = L.marker(e.latlng).addTo(map)
-                locationMarker.bindPopup("You are within " + Math.round(radius) + " meters of this point");
-                firstLocate = false;
+                circle = L.circle(e.latlng, {radius:radius, interactive:false}).addTo(map);
+                locationMarker = L.marker(e.latlng,{interactive:false}).addTo(map);
+                //locationMarker = L.marker(e.latlng).addTo(map).bindPopup("You are within " + Math.round(radius) + " meters of this point");
             }
             //if accuracy is less than 60m then stop calling locate function
             if (e.accuracy < 40){
+                let count = 0;
                 map.stopLocate();
                 count++;
             }
-                 
-            let cZoom = map.getZoom();
-            map.setView(e.latlng, cZoom);
-
-            if (circle)
-                removeFoundMarker(circle, locationMarker);
-        }
-        //remove location circle marker
-        function removeFoundMarker(circle, marker){
-            setTimeout(function() {
-                map.removeLayer(circle);
-                map.removeLayer(marker);
-            }, 10000);
         }
     
         map.on('locationfound', onLocationFound);
 
+        //activate location at a regular interval
+        window.setInterval( function(){
+            map.locate({
+                setView: false,
+                enableHighAccuracy: true
+                });
+        }, 2500);
     }
     //add tour route to the map
     function addRoute(){
@@ -104,7 +103,7 @@
                     style:function(feature){
                         return {
                             className:"route-" + feature.properties.end,
-                            weight:5
+                            weight:6
                         }
                     }
                 }).addTo(map)
@@ -166,10 +165,11 @@
                     pointToLayer:function(feature, latlng){
                         //set point styling
                         let options = {
-                            radius:5,
+                            radius:12,
                             className:"stop-" + feature.properties.id,
                             opacity:1,
                             fillOpacity:1,
+                            weight:5,
                             pane:"markerPane"
                         }
                         
@@ -186,7 +186,26 @@
                             let coordinates = new L.LatLng(feature.geometry.coordinates[1],feature.geometry.coordinates[0])
                             map.setView(coordinates)
                         }
-
+                        //add stops to stop menu
+                        if (feature.properties.name){
+                            let point = feature.properties.id + ". ";
+                            //create new <a> element for the current stop on the tour
+                            let menuStop = document.createElement("p")
+                                menuStop.innerHTML = point + feature.properties.name;
+                                menuStop.className = "dropdown-item";
+                            //add listener to jump to stop
+                            menuStop.addEventListener("click",function(){
+                                //document.querySelector(".stop-menu").style.display = "none";
+                                //document.querySelector(".stop-button").innerHTML = "Stops";
+                                currentStop = feature.properties.id;
+                                openModal(feature.properties); 
+                            })
+                            //create list structure
+                            let listItem = document.createElement("li");
+                            listItem.insertAdjacentElement("beforeend",menuStop)
+                            //add element to list
+                            document.querySelector(".dropdown-menu").insertAdjacentElement("beforeend",listItem)
+                        }
                     }
                 }).addTo(map);
 
