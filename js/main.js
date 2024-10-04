@@ -36,6 +36,8 @@
     })
     //create map
     function createMap(){
+        resizeMap();
+       
         map = L.map("map",{
             center:L.latLng(50.5, 30.5),
             zoom:16,
@@ -102,7 +104,7 @@
                 route = L.geoJson(data,{
                     style:function(feature){
                         return {
-                            className:"route-" + feature.properties.end,
+                            className:"route-" + feature.properties.id,
                             weight:6
                         }
                     }
@@ -112,10 +114,10 @@
     }
     //set route color
     function routeClass(props){
-        let elem = document.querySelector(".route-" + props.end);
+        let elem = document.querySelector(".route-" + props.id);
         elem.classList.remove("inactive-route")
             
-        if (Number(props.end) <= currentStop)
+        if (Number(props.id) < currentStop)
             elem.classList.add("active-route")
         else
             elem.classList.add("inactive-route")
@@ -264,7 +266,7 @@
         }
         //add image if image exists
         if (props.image){
-            let img = "<img src='assets/" + props.image + "' id='stop-img'>"
+            let img = "<img src='img/" + props.image + "' id='stop-img'>"
             document.querySelector("#stop-body").insertAdjacentHTML("beforeend",img)
         }
         //add body text if body text exists
@@ -320,6 +322,20 @@
             active = false; 
         }
     }
+
+    //position the map relative to the navigation bar
+    function resizeMap(){
+        //get height of navigation bar and window
+        let nav = document.querySelector(".navbar").offsetHeight,
+            h = document.querySelector("body").offsetHeight;
+        //calculate height of map based on the navigation bar and the window
+        let mapHeight = h - nav;
+        //set height and position  of map
+        document.querySelector("#map").style.top = nav + "px";
+        document.querySelector("#map").style.height = mapHeight + "px";
+    }
+
+    window.addEventListener('resize',resizeMap)
 
     createMap();
 })();
