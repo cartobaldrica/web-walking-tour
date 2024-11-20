@@ -50,7 +50,6 @@ button:hover{
 .inactive-stop{
     fill:gray;
     stroke:black;
-
 }
 /*ROUTE STYLING*/
 .active-route{
@@ -89,7 +88,6 @@ button:hover{
 #splash-body{
     height:100%;
     padding-bottom:20px;
-    overflow:auto;
     -webkit-overflow-scrolling: touch;
 }
 #splash-title{
@@ -123,7 +121,6 @@ button:hover{
 }
 #stop-body{
     height:100%;
-    overflow:scroll;
 }
 #stop-img{
     width:100%;
