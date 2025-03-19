@@ -5,6 +5,14 @@ For those more familiar with JavaScript, the libary can be easily adapted to new
 
 The library currently utilizes sample content created for a Green Stormwater Infrastructure Tour created in partnership between the UW Cartography Lab, and Wisconsin Sea Grant.
 
+## Examples
+
+These examples are student projects from the Fall 2024 semester of _Geography 572: Graphic Design in Cartography_ at UW-Madison.
+
+[Wisconsin Avenue, how did you get here?](https://cldennis.github.io/walkingtour/) by Christina Dennis ([portfolio](https://cldennis.github.io/))
+
+[Small Green Spaces in East Madison](https://wholegrainmustard.github.io/572_walkingTour/#close) by Alton Hipps ([portfolio](https://wholegrainmustard.github.io/portfolio/index.html))
+
 # Getting Started
 Begin by downloading the zip file of the library ([main.zip](https://github.com/cartobaldrica/web-walking-tour/archive/refs/heads/main.zip)), or cloning it to your local computer.
 
