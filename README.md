@@ -13,6 +13,12 @@ These examples are student projects from the Fall 2024 semester of _Geography 57
 
 [Small Green Spaces in East Madison](https://wholegrainmustard.github.io/572_walkingTour/#close) by Alton Hipps ([portfolio](https://wholegrainmustard.github.io/portfolio/index.html))
 
+[Keep Willy St. Weird: A Walking Tour](https://brynnpatrello.github.io/web-walking-tour/) by Brynn Patrello ([portfolio](https://brynnpatrello.github.io/portfolio/))
+
+[Women of UW Madison Walking Tour](https://cc-carto.github.io/uwm_womens_walkingtour/) by Chloe Chan ([portfolio](https://cc-carto.github.io/index.html))
+
+[Urban Parking Walking Tour](https://willmcallister.github.io/parking-walking-tour/) by Will McAllister ([portfolio](https://willmcallister.github.io/portfolio))
+
 # Getting Started
 Begin by downloading the zip file of the library ([main.zip](https://github.com/cartobaldrica/web-walking-tour/archive/refs/heads/main.zip)), or cloning it to your local computer.
 
