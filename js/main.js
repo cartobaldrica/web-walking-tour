@@ -145,22 +145,25 @@
                 }
                 //populate geojson
                 data.forEach(function(feature, i){
-                    //add to total length
-                    if (feature.hidden == "FALSE")
-                        tourLength++;
-                    //create empty object
-                    let obj = {};
-                    //set feature
-                    obj.type = "Feature";
-                    //add geometry
-                    obj.geometry = {
-                        type: "Point",
-                        coordinates: [Number(feature.lon), Number(feature.lat)]
-                    } 
-                    //add properties
-                    obj.properties = feature;
-                    //add object to geojson
-                    geojson.features.push(obj)
+                    //error handle for accidentally blank csv lines
+                    if (feature.id){
+                        //add to total length
+                        if (feature.hidden == "FALSE")
+                            tourLength++;
+                        //create empty object
+                        let obj = {};
+                        //set feature
+                        obj.type = "Feature";
+                        //add geometry
+                        obj.geometry = {
+                            type: "Point",
+                            coordinates: [Number(feature.lon), Number(feature.lat)]
+                        } 
+                        //add properties
+                        obj.properties = feature;
+                        //add object to geojson
+                        geojson.features.push(obj)
+                    }
                 })
                 //add geojson to map
                 stops = L.geoJson(geojson,{
